@@ -11,12 +11,22 @@ h1 {
     color: gold;
 }
 
+.user-group {
+    padding-top: 10px;
+    font-size: large;
+}
+
 #message-el {
     font-style: italic;
     font-size: large;
 }
 
 #dealers-hand-el {
+    font-size: large;
+    font-style: italic;
+}
+
+#dealers-sum-el {
     font-size: large;
     font-style: italic;
 }
