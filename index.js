@@ -13,7 +13,13 @@ function startGame() {
     let secondCard = getCard()
     cards.push(firstCard, secondCard)
     sum = firstCard + secondCard
-    sumEl.textContent += sum
+    renderGame()
+}
+
+function renderGame() {
+    for (i = 0; i < cards.length; i++) {
+        cardEl.textContent += cards[i] + " "
+    }
 }
 
 function getCard() {
