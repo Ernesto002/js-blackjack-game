@@ -7,6 +7,15 @@ let messageEl = document.getElementById("message-el")
 let cardEl = document.getElementById("card-el")
 let sumEl = document.getElementById("sum-el")
 
+function startGame() {
+    isAlive = true
+    let firstCard = getCard()
+    let secondCard = getCard()
+    cards.push(firstCard, secondCard)
+    sum = firstCard + secondCard
+    sumEl.textContent += sum
+}
+
 function getCard() {
     let randomNumber = Math.floor( Math.random() * 13 ) + 1
     if (randomNumber > 10) {
