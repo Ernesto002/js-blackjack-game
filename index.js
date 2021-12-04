@@ -17,6 +17,7 @@ function startGame() {
 }
 
 function renderGame() {
+    cardEl.textContent = "Cards: "
     for (i = 0; i < cards.length; i++) {
         cardEl.textContent += cards[i] + " "
     }
