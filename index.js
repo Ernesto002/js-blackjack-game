@@ -20,6 +20,8 @@ function renderGame() {
     for (i = 0; i < cards.length; i++) {
         cardEl.textContent += cards[i] + " "
     }
+    
+    sumEl.textContent = "Sum: " + sum
 }
 
 function getCard() {
@@ -31,4 +33,11 @@ function getCard() {
     } else {
         return randomNumber
     }
+}
+
+function newCard() {
+    let card = getCard()
+    sum += card
+    cards.push(card)
+    renderGame()
 }
