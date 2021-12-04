@@ -1,4 +1,6 @@
 let cards = []
+let dealersCards = []
+let dealersSum = 0
 let sum = 0
 let hasBlackJack = false
 let isAlive = false
@@ -8,6 +10,7 @@ let cardEl = document.getElementById("card-el")
 let sumEl = document.getElementById("sum-el")
 let standEl = document.getElementById("stand-el")
 let dealersHandEl = document.getElementById("dealers-hand-el")
+let dealersSumEl = document.getElementById("dealers-sum-el")
 let startBttn = document.querySelector("#start-bttn")
 
 function startGame() {
@@ -16,16 +19,27 @@ function startGame() {
     let secondCard = getCard()
     cards.push(firstCard, secondCard)
     sum = firstCard + secondCard
+    let dealersFirstCard = getCard()
+    let dealersSecondCard = getCard()
+    dealersCards.push(dealersFirstCard, dealersSecondCard)
+    dealersSum = dealersFirstCard + dealersSecondCard
+    startBttn.parentElement.removeChild(startBttn)
     renderGame()
 }
 
 function renderGame() {
-    cardEl.textContent = "Cards: "
+    cardEl.textContent = "Your Cards: "
     for (i = 0; i < cards.length; i++) {
         cardEl.textContent += cards[i] + " "
     }
-    
+
+    dealersHandEl.textContent = "Dealers Cards: "
+    for (i = 0; i < dealersCards.length; i++) {
+        dealersHandEl.textContent += dealersCards[i] + " "
+    }
+
     sumEl.textContent = "Your hand: " + sum
+    dealersSumEl.textContent = "Dealers Hand: " + dealersSum
     if(sum <= 20){
         message = "Would you like to draw another card?"
     } else if (sum === 21) {
@@ -36,8 +50,23 @@ function renderGame() {
         isAlive = false
     }
     messageEl.textContent = message
-    startBttn.parentElement.removeChild(startBttn)
+}
 
+function standCards() {
+    if(isAlive === true && hasBlackJack === false) {
+        if(dealersTotalHand === usersHand) {
+            message = "It's a draw!"
+            isAlive = false
+        } else if (dealersTotalHand > 21 || dealersTotalHand < usersHand) {
+            message = "You won!"
+            hasBlackJack = true
+        } else if (dealersTotalHand > usersHand) {
+            message = "You lost!"
+            isAlive = false
+        }
+        messageEl.textContent = message
+        dealersHandEl.textContent = "Dealers hand: " + dealersTotalHand
+    }
 }
 
 function getCard() {
@@ -57,25 +86,5 @@ function newCard() {
         sum += card
         cards.push(card)
         renderGame()
-    }
-}
-
-function standCards() {
-    if(isAlive === true && hasBlackJack === false) {
-        let dealersHand = Math.floor( Math.random() * 21) + 1
-        let usersHand = sum
-
-        if(dealersHand === usersHand) {
-            message = "It's a draw!"
-            isAlive = false
-        } else if (dealersHand > 21 || dealersHand < usersHand) {
-            message = "You won!"
-            hasBlackJack = true
-        } else if (dealersHand > usersHand) {
-            message = "You lost!"
-            isAlive = false
-        }
-        messageEl.textContent = message
-        dealersHandEl.textContent = "Dealers hand: " + dealersHand
     }
 }
