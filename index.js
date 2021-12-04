@@ -6,6 +6,8 @@ let message = ""
 let messageEl = document.getElementById("message-el")
 let cardEl = document.getElementById("card-el")
 let sumEl = document.getElementById("sum-el")
+let standEl = document.getElementById("stand-el")
+let dealersHandEl = document.getElementById("dealers-hand-el")
 
 function startGame() {
     isAlive = true
@@ -22,7 +24,7 @@ function renderGame() {
         cardEl.textContent += cards[i] + " "
     }
     
-    sumEl.textContent = "Sum: " + sum
+    sumEl.textContent = "Your hand: " + sum
     if(sum <= 20){
         message = "Would you like to draw another card?"
     } else if (sum === 21) {
@@ -52,5 +54,22 @@ function newCard() {
         sum += card
         cards.push(card)
         renderGame()
+    }
+}
+
+function standCards() {
+    if(isAlive === true && hasBlackJack === false) {
+        let dealersHand = Math.floor( Math.random() * 21) + 1
+        let usersHand = sum
+
+        if(dealersHand === usersHand) {
+            message = "It's a draw!"
+        } else if (dealersHand > 21 || dealersHand < usersHand) {
+            message = "You won!"
+        } else if (dealersHand > usersHand) {
+            message = "You lost!"
+        }
+        messageEl.textContent = message
+        dealersHandEl.textContent = "Dealers hand: " + dealersHand
     }
 }
