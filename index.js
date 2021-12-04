@@ -64,10 +64,13 @@ function standCards() {
 
         if(dealersHand === usersHand) {
             message = "It's a draw!"
+            isAlive = false
         } else if (dealersHand > 21 || dealersHand < usersHand) {
             message = "You won!"
+            hasBlackJack = true
         } else if (dealersHand > usersHand) {
             message = "You lost!"
+            isAlive = false
         }
         messageEl.textContent = message
         dealersHandEl.textContent = "Dealers hand: " + dealersHand
