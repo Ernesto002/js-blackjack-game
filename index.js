@@ -8,6 +8,7 @@ let cardEl = document.getElementById("card-el")
 let sumEl = document.getElementById("sum-el")
 let standEl = document.getElementById("stand-el")
 let dealersHandEl = document.getElementById("dealers-hand-el")
+let startBttn = document.querySelector("#start-bttn")
 
 function startGame() {
     isAlive = true
@@ -35,6 +36,8 @@ function renderGame() {
         isAlive = false
     }
     messageEl.textContent = message
+    startBttn.parentElement.removeChild(startBttn)
+
 }
 
 function getCard() {
